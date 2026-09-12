@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class RangedProjectile : MonoBehaviour
@@ -5,6 +6,8 @@ public class RangedProjectile : MonoBehaviour
     [SerializeField] private float speed = 4f;
     [SerializeField] private float timeToLive = 1f;
     [SerializeField] private float damage = 20f;
+    [SerializeField] private bool isBlokedByWalls = false;
+    [SerializeField] private string target = "Player";
 
     private Rigidbody2D rb;
 
@@ -15,7 +18,7 @@ public class RangedProjectile : MonoBehaviour
 
     private void Start()
     {
-        rb.linearVelocity = transform.up * speed;
+        rb.AddForce(transform.up * speed, ForceMode2D.Impulse);
     }
 
     private void Update()
@@ -28,19 +31,44 @@ public class RangedProjectile : MonoBehaviour
         }
     }
 
+    public void SetDamage(float newDamage)
+    {
+        if(newDamage <= 0)
+        {
+            Debug.Log("Projectile damage can not be 0 or negative");
+            return;
+        }
+        damage = newDamage;
+    }
+
+    public void SetSpeed(float newSpeed)
+    {
+        if(newSpeed <= 0)
+        {
+            Debug.Log("Projectile speed can not be 0 or negative");
+            return;
+        }
+        speed = newSpeed;
+    }
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag(target))
         {
-            PlayerInputs player =
-                collision.gameObject.GetComponent<PlayerInputs>();
+            Unit unit = collision.gameObject.GetComponent<Unit>();
 
-            if (player != null)
+            if(unit != null)
             {
-                player.TakeDamage(damage);
+                unit.TakeDamage(damage);
             }
 
             Destroy(gameObject);
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("wall") && isBlokedByWalls)
+        {
+            rb.linearVelocity = Vector2.zero;
         }
     }
 }

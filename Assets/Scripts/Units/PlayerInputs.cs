@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class PlayerInputs : MonoBehaviour
+public class PlayerInputs : Unit
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 1f;
@@ -26,7 +26,6 @@ public class PlayerInputs : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 movement;
     private float attTimer;
-    private Transform target;
 
     private void Awake()
     {
@@ -63,12 +62,11 @@ public class PlayerInputs : MonoBehaviour
 
         movement = movement.normalized;
 
-        FindClosestEnemy();
-
         attTimer -= Time.deltaTime;
 
         if (movement == Vector3.zero)
         {
+            FindClosestEnemy();
             if (target != null && attTimer <= 0f)
             {
                 Attack();
@@ -95,7 +93,7 @@ public class PlayerInputs : MonoBehaviour
         }
         else if (target != null)
         {
-            LookAtEnemy();
+            LookAtTarget();
         }
     }
 
@@ -125,25 +123,12 @@ public class PlayerInputs : MonoBehaviour
         target = closestEnemy;
     }
 
-    private void LookAtEnemy()
-    {
-        Vector2 direction =
-            target.position - transform.position;
-
-        float angle =
-            Mathf.Atan2(direction.y, direction.x)
-            * Mathf.Rad2Deg - 90f;
-
-        transform.rotation =
-            Quaternion.Euler(0f, 0f, angle);
-    }
-
     private void Attack()
     {
         if (target == null)
             return;
 
-        LookAtEnemy();
+        LookAtTarget();
 
         GameObject arrowObject = Instantiate(
             arrowPrefab,
@@ -151,7 +136,7 @@ public class PlayerInputs : MonoBehaviour
             transform.rotation
         );
 
-        Arrow arrow = arrowObject.GetComponent<Arrow>();
+        RangedProjectile arrow = arrowObject.GetComponent<RangedProjectile>();
 
         if (arrow != null)
         {
@@ -161,7 +146,7 @@ public class PlayerInputs : MonoBehaviour
         audioSource.Play();
     }
 
-    public void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         currentHealth -= damage;
 

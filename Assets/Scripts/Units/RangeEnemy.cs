@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class RangedEnemy : MonoBehaviour
+public class RangedEnemy : Unit
 {
     [SerializeField] private float maxHealth = 25f;
     [SerializeField] private float moveSpeed = 3f;
@@ -13,13 +13,10 @@ public class RangedEnemy : MonoBehaviour
     [SerializeField] private Slider healthBar;
     [SerializeField] private AudioSource audioSource;
     private Rigidbody2D rb;
-    private Transform player;
 
     private float attackTimer;
     private float repositionTimer;
 
-    private Vector2 targetPosition;
-    private bool isRepositioning;
     private float currentHealth;
     private void Awake()
     {
@@ -37,7 +34,7 @@ public class RangedEnemy : MonoBehaviour
 
         if (playerObject != null)
         {
-            player = playerObject.transform;
+            target = playerObject.transform;
         }
 
         attackTimer = attackCooldown;
@@ -46,16 +43,16 @@ public class RangedEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (player == null)
+        if (target == null)
             return;
 
         attackTimer -= Time.deltaTime;
         repositionTimer -= Time.deltaTime;
 
         float distance =
-            Vector2.Distance(transform.position, player.position);
+            Vector2.Distance(transform.position, target.position);
 
-        if (distance <= attackRange && !isRepositioning)
+        if (distance <= attackRange)
         {
             if (attackTimer <= 0f)
             {
@@ -65,45 +62,28 @@ public class RangedEnemy : MonoBehaviour
 
             if (repositionTimer <= 0f)
             {
-                // ChooseNewPosition();
                 repositionTimer = repositionTime;
             }
         }
-        lookAtPlayer();
-        healthBar.transform.rotation = Quaternion.identity;
-        healthBar.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 0.7f);
+        //Same as Enemy
+        LookAtTarget();
+        fixHealtBar();
     }
 
     private void FixedUpdate()
     {
-        if (player == null)
+        if (target == null)
             return;
 
         float distance =
-            Vector2.Distance(transform.position, player.position);
+            Vector2.Distance(transform.position, target.position);
 
-        if (!isRepositioning && distance > attackRange)
+        if (distance > attackRange)
         {
             Vector2 direction =
-                (player.position - transform.position).normalized;
+                (target.position - transform.position).normalized;
 
             rb.linearVelocity = direction * moveSpeed;
-        }
-        else if (isRepositioning)
-        {
-            Vector2 direction =
-                (targetPosition - (Vector2)transform.position).normalized;
-
-            rb.linearVelocity = direction * moveSpeed;
-
-            float distanceToTarget =
-                Vector2.Distance(transform.position, targetPosition);
-
-            if (distanceToTarget < 0.2f)
-            {
-                rb.linearVelocity = Vector2.zero;
-                isRepositioning = false;
-            }
         }
         else
         {
@@ -111,13 +91,19 @@ public class RangedEnemy : MonoBehaviour
         }
     }
 
+    private void fixHealtBar()
+    {
+        healthBar.transform.rotation = Quaternion.identity;
+        healthBar.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 0.7f);
+    }
+
     private void Attack()
     {
-        if (player == null)
+        if (target == null)
             return;
 
         Vector2 direction =
-            (player.position - transform.position).normalized;
+            (target.position - transform.position).normalized;
 
         float angle =
             Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
@@ -133,7 +119,7 @@ public class RangedEnemy : MonoBehaviour
         audioSource.Play();
     }
 
-    public void TakeDamage(float damageAmount)
+    public override void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
         healthBar.value = currentHealth;
@@ -141,16 +127,5 @@ public class RangedEnemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-    private void lookAtPlayer()
-    {
-        Vector2 direction =
-            player.position - transform.position;
-
-        float angle =
-            Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-
-        transform.rotation =
-            Quaternion.Euler(0f, 0f, angle);
     }
 }
