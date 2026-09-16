@@ -32,8 +32,9 @@ public class PlayerInputs : Unit
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         currentHealth = maxHealth;
 
         healthBar.maxValue = maxHealth;
@@ -160,10 +161,12 @@ public class PlayerInputs : Unit
             Destroy(gameObject);
             GameManager.Instance.GameOver();
         }
+        base.TakeDamage(damage);
     }
 
     private void UpdateHealthUI()
     {
+        healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
         healthText.text = currentHealth + " / " + maxHealth;
     }
@@ -173,9 +176,11 @@ public class PlayerInputs : Unit
         arrowDamage += amount;
     }
 
+    //Heal % max hp
     public void Heal(float amount)
     {
-        currentHealth += amount;
+        float amoutToHeal = maxHealth * (amount/100);
+        currentHealth += amoutToHeal;
 
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;

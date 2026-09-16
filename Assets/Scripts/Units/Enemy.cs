@@ -15,8 +15,9 @@ public class Enemy : Unit
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         currentHealth = maxHealth;
         healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
@@ -77,6 +78,7 @@ public class Enemy : Unit
 
     public override void TakeDamage(float damageAmount)
     {
+        base.TakeDamage(damageAmount);
         currentHealth -= damageAmount;
         healthBar.value = currentHealth;
 

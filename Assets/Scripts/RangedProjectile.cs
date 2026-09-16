@@ -8,6 +8,7 @@ public class RangedProjectile : MonoBehaviour
     [SerializeField] private float damage = 20f;
     [SerializeField] private bool isBlokedByWalls = false;
     [SerializeField] private string target = "Player";
+    [SerializeField] GameObject impactPariclePrefab;
 
     private Rigidbody2D rb;
 
@@ -69,6 +70,13 @@ public class RangedProjectile : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("wall") && isBlokedByWalls)
         {
             rb.linearVelocity = Vector2.zero;
+            
+            ContactPoint2D contact = collision.contacts[0];
+            Vector2 spawnPos = contact.point;
+
+            Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, contact.normal);
+            GameObject particles = Instantiate(impactPariclePrefab, spawnPos, spawnRotation);
+            Destroy(particles, 2f);
         }
     }
 }

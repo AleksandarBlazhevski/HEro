@@ -78,7 +78,7 @@ public class UpgradeManager : MonoBehaviour
                 return "Damage +5";
 
             case UpgradeType.Heal:
-                return "Heal +20 HP";
+                return "Heal 20% HP";
 
             case UpgradeType.AttackSpeed:
                 return "Attack Speed +0.2";

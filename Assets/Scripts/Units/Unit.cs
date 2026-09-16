@@ -3,11 +3,12 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     protected Transform target;
+    private SpriteRenderer sr;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected virtual void Start()
     {
-        
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -18,14 +19,14 @@ public class Unit : MonoBehaviour
 
     public virtual void TakeDamage(float damageAmount)
     {
-        Debug.Log("BASE CALLED TAKE DAMAGE");
-        // currentHealth -= damageAmount;
-        // healthBar.value = currentHealth;
+        sr.color = Color.red;
 
-        // if (currentHealth <= 0f)
-        // {
-        //     Destroy(gameObject);
-        // }
+        Invoke(nameof(stopDmgIndicator), 0.2f);
+    }
+
+    private void stopDmgIndicator()
+    {
+        sr.color = Color.white;
     }
 
     protected virtual void LookAtTarget()
