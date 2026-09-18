@@ -1,18 +1,27 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 public class Enemy : Unit
 {
     [SerializeField] private float maxHealth = 40f;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private Slider healthBar;
+
+    [Header("Attack")]
+    [SerializeField] private float attackDelay = 0.2f;
+    [SerializeField] private float attackCooldownTimer = 0;
+    [SerializeField] private float attackCooldown = 1f;
+    [SerializeField] private GameObject attackPrefab;
+
     private float currentHealth;
-    private Rigidbody2D rb;
     [SerializeField] private AudioSource audioSource;
-    private bool isAttacking;
+    private NavMeshAgent agent;
+    private bool playerInRange;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     protected override void Start()
@@ -21,12 +30,20 @@ public class Enemy : Unit
         currentHealth = maxHealth;
         healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
-        GameObject playerObject =
-            GameObject.FindGameObjectWithTag("Player");
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+            playerInRange = false;
 
         if (playerObject != null)
         {
             target = playerObject.transform;
+        }
+
+        if (agent)
+        {
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
+            agent.speed = moveSpeed;
         }
     }
 
@@ -42,38 +59,44 @@ public class Enemy : Unit
 
     private void FixedUpdate()
     {
+        attackCooldownTimer -= Time.deltaTime;
         if (target == null)
             return;
 
-        if (isAttacking)
+        if (playerInRange && attackCooldownTimer <= 0f)
         {
-            rb.linearVelocity = Vector2.zero;
-            return;
+            StartCoroutine(StartToAttack());
         }
 
-        Vector2 direction =
-            (target.position - transform.position).normalized;
-    
-        rb.linearVelocity = direction * moveSpeed;
+        agent.SetDestination(target.position);
+    }
+
+    private IEnumerator StartToAttack()
+    {
+        agent.speed = 0;
+        attackCooldownTimer = attackCooldown;
+        //todo rework so it does not spawn on top of player
+        Vector3 pos = target.position;
+
+        GameObject attack =
+            Instantiate(
+                attackPrefab,
+                pos,
+                transform.rotation
+            );
+
+        audioSource.Play();
+        Destroy(attack, attackDelay);
+
+        yield return new WaitForSeconds(attackCooldown);
+
+        agent.speed = moveSpeed;
     }
 
     private void fixHealtBar()
     {
         healthBar.transform.rotation = Quaternion.identity;
         healthBar.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 0.7f);
-    }
-
-    public void StartAttack()
-    {
-        isAttacking = true;
-        rb.linearVelocity = Vector2.zero;
-
-        audioSource.Play();
-    }
-
-    public void StopAttack()
-    {
-        isAttacking = false;
     }
 
     public override void TakeDamage(float damageAmount)
@@ -86,5 +109,10 @@ public class Enemy : Unit
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetPlayerInRange(bool isInRange)
+    {
+        playerInRange = isInRange;
     }
 }

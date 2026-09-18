@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 6763317980030914187}
   - component: {fileID: 7278930633616859022}
   - component: {fileID: 3863822051544840321}
+  - component: {fileID: 1005329235601507374}
   m_Layer: 9
   m_Name: SideObstacle2
   m_TagString: Untagged
@@ -306,6 +307,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1005329235601507374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863859351609544991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1198987961331578514
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +555,7 @@ GameObject:
   - component: {fileID: 3124702442149897764}
   - component: {fileID: 6993874696778094030}
   - component: {fileID: 860344841688074895}
+  - component: {fileID: 7711107852889810795}
   m_Layer: 9
   m_Name: BigSideObstacle1
   m_TagString: Untagged
@@ -665,6 +683,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7711107852889810795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010293892279105676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &2464858026837035930
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,6 +973,7 @@ GameObject:
   - component: {fileID: 1061354109953206337}
   - component: {fileID: 7436738983525096389}
   - component: {fileID: 7191956206640853320}
+  - component: {fileID: 8596666252015948790}
   m_Layer: 9
   m_Name: BottomWall
   m_TagString: Untagged
@@ -1066,6 +1101,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8596666252015948790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4159595879835811361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &4217133003044721580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,6 +1402,7 @@ GameObject:
   - component: {fileID: 1137804677927438491}
   - component: {fileID: 659202648277965663}
   - component: {fileID: 4095887988185117629}
+  - component: {fileID: 291986859362049229}
   m_Layer: 9
   m_Name: TopObstacle
   m_TagString: Untagged
@@ -1478,6 +1530,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &291986859362049229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897997032791594183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &5097270271222670639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,6 +1937,7 @@ GameObject:
   - component: {fileID: 8603331239041727612}
   - component: {fileID: 3327437387986103384}
   - component: {fileID: 2132934193859514890}
+  - component: {fileID: 7196110964183538849}
   m_Layer: 9
   m_Name: BigSideObstacle2
   m_TagString: Untagged
@@ -1996,6 +2065,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7196110964183538849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6440272480633531445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &6621703122180663776
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,10 +2175,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
   isPlayerInside: 0
   hasSpawned: 0
+  upgradeShown: 0
   enemiesAlive: []
   meleeSpawner: {fileID: 0}
   rangeSpawner: {fileID: 0}
   portal: {fileID: 0}
+  upgradeManager: {fileID: 0}
+  showUpgrade: 1
 --- !u!61 &5967226527515657596
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2182,6 +2270,7 @@ GameObject:
   - component: {fileID: 5991121328086508667}
   - component: {fileID: 7334047309638888145}
   - component: {fileID: 5068191916815486527}
+  - component: {fileID: 2264376337089574170}
   m_Layer: 9
   m_Name: LeftWall
   m_TagString: Untagged
@@ -2309,6 +2398,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2264376337089574170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8192691289079787148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &8267134286326616244
 GameObject:
   m_ObjectHideFlags: 0
@@ -2457,6 +2562,7 @@ GameObject:
   - component: {fileID: 3403733613252409103}
   - component: {fileID: 3209697475049595859}
   - component: {fileID: 4670644995233558266}
+  - component: {fileID: 5329386087808012783}
   m_Layer: 9
   m_Name: TopWall
   m_TagString: Untagged
@@ -2584,6 +2690,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5329386087808012783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8882520466057081832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &8925217304533929812
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,6 +2716,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6305073905111351494}
   - component: {fileID: 149486291926395716}
+  - component: {fileID: 7628075790856536376}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -2675,6 +2798,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &7628075790856536376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8925217304533929812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 0
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &8970740961915977180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2686,6 +2825,7 @@ GameObject:
   - component: {fileID: 6889529732662641136}
   - component: {fileID: 3414724616996238111}
   - component: {fileID: 4811744603625148240}
+  - component: {fileID: 1516154613578307422}
   m_Layer: 9
   m_Name: RightWalll
   m_TagString: Untagged
@@ -2813,6 +2953,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1516154613578307422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8970740961915977180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &9105966166178414486
 GameObject:
   m_ObjectHideFlags: 0
@@ -2957,6 +3113,7 @@ GameObject:
   - component: {fileID: 8308246509608995279}
   - component: {fileID: 6661177201263808471}
   - component: {fileID: 6236069535696343772}
+  - component: {fileID: 8571590128119943963}
   m_Layer: 9
   m_Name: Obstacle 2
   m_TagString: Untagged
@@ -3084,3 +3241,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8571590128119943963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9176792191562383743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

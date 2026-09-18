@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2952249743073061656}
   - component: {fileID: 6863897369525236857}
-  - component: {fileID: 8482789635510377505}
+  - component: {fileID: 9117566903321032250}
   m_Layer: 6
   m_Name: Range
   m_TagString: Untagged
@@ -69,7 +69,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &8482789635510377505
+--- !u!114 &9117566903321032250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78,13 +78,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1470042226177751602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da7acff3ae3ea484b985276102509a93, type: 3}
+  m_Script: {fileID: 11500000, guid: dcfa823c71afdc34dbd420caf2118cea, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Attack
-  attackDelay: 0.2
+  m_EditorClassIdentifier: Assembly-CSharp::InAttackRange
   attackCooldown: 1
-  damage: 10
-  attackPrefab: {fileID: 6031548259673307151, guid: e6fd8cb53bcc84d47b096ba15aeba87c, type: 3}
+  target: {fileID: 0}
 --- !u!1 &1572354834069892214
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +372,7 @@ GameObject:
   - component: {fileID: 408101377984455289}
   - component: {fileID: 6046152780785628442}
   - component: {fileID: 1643852044768416244}
+  - component: {fileID: 330458855544799145}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -507,10 +506,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   maxHealth: 40
   moveSpeed: 2
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 512
   healthBar: {fileID: 1019766335331409629}
+  attackDelay: 0.2
+  attackCooldownTimer: 0
+  attackCooldown: 1
+  attackPrefab: {fileID: 6031548259673307151, guid: e6fd8cb53bcc84d47b096ba15aeba87c, type: 3}
   audioSource: {fileID: 1643852044768416244}
 --- !u!50 &6046152780785628442
 Rigidbody2D:
@@ -520,7 +520,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6001590603574627328}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -636,6 +636,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!195 &330458855544799145
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6001590603574627328}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.4
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.4901453
+  m_BaseOffset: 0.74507266
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7974692908274945884
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,12 +9,14 @@ public class RangedProjectile : MonoBehaviour
     [SerializeField] private bool isBlokedByWalls = false;
     [SerializeField] private string target = "Player";
     [SerializeField] GameObject impactPariclePrefab;
+    [SerializeField] AudioSource audioSource;
 
     private Rigidbody2D rb;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -70,6 +72,11 @@ public class RangedProjectile : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("wall") && isBlokedByWalls)
         {
             rb.linearVelocity = Vector2.zero;
+
+            if (audioSource)
+            {
+                audioSource.Play();
+            }
             
             ContactPoint2D contact = collision.contacts[0];
             Vector2 spawnPos = contact.point;
@@ -77,6 +84,7 @@ public class RangedProjectile : MonoBehaviour
             Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, contact.normal);
             GameObject particles = Instantiate(impactPariclePrefab, spawnPos, spawnRotation);
             Destroy(particles, 2f);
+            GetComponent<Collider2D>().enabled = false;
         }
     }
 }

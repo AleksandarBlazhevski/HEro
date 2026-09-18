@@ -143,7 +143,7 @@ public class PlayerInputs : Unit
         {
             arrow.SetDamage(arrowDamage);
         }
-
+        audioSource.pitch = UnityEngine.Random.Range(1f, 1.3f);
         audioSource.Play();
     }
 
