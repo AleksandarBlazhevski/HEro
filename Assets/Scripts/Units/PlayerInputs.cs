@@ -12,7 +12,6 @@ public class PlayerInputs : Unit
     [SerializeField] private float currentHealth;
 
     [Header("Attack")]
-    [SerializeField] private float attSpeed = 1f;
     [SerializeField] private float attRange = 5f;
     [SerializeField] private float arrowDamage = 10f;
     [SerializeField] private GameObject arrowPrefab;
@@ -23,13 +22,12 @@ public class PlayerInputs : Unit
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private AudioSource audioSource;
 
-    private Rigidbody2D rb;
     private Vector3 movement;
-    private float attTimer;
+    
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        
     }
 
     protected override void Start()
@@ -40,7 +38,7 @@ public class PlayerInputs : Unit
         healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
 
-        attTimer = 0f;
+        attackCooldownTimer = 0f;
 
         UpdateHealthUI();
     }
@@ -63,15 +61,15 @@ public class PlayerInputs : Unit
 
         movement = movement.normalized;
 
-        attTimer -= Time.deltaTime;
+        attackCooldownTimer -= Time.deltaTime;
 
         if (movement == Vector3.zero)
         {
             FindClosestEnemy();
-            if (target != null && attTimer <= 0f)
+            if (target != null && attackCooldownTimer <= 0f)
             {
                 Attack();
-                attTimer = 1f / attSpeed;
+                attackCooldownTimer = 1f / attackSpeed;
             }
         }
     }
@@ -190,7 +188,7 @@ public class PlayerInputs : Unit
 
     public void IncreaseAttackSpeed(float amount)
     {
-        attSpeed += amount;
+        attackSpeed += amount;
     }
 
     public void IncreaseMoveSpeed(float amount)

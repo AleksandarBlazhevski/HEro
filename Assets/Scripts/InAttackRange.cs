@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class InAttackRange : MonoBehaviour
 {
-    [SerializeField] float attackCooldown = 1f;
     [SerializeField] GameObject target = null;
     
     private Enemy unit;

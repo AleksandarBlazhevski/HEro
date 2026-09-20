@@ -63,6 +63,8 @@ public class RangedProjectile : MonoBehaviour
 
             if(unit != null)
             {
+                Vector2 direction = (collision.transform.position - transform.position).normalized;
+                unit.Stagger(direction, damage / 10f); //todo constants
                 unit.TakeDamage(damage);
             }
 

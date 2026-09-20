@@ -5,22 +5,16 @@ public class RangedEnemy : Unit
     [SerializeField] private float maxHealth = 25f;
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float attackRange = 6f;
-    [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
 
-    [SerializeField] private float repositionTime = 3f;
     [SerializeField] private Slider healthBar;
     [SerializeField] private AudioSource audioSource;
-    private Rigidbody2D rb;
-
-    private float attackTimer;
-    private float repositionTimer;
 
     private float currentHealth;
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        
     }
 
     protected override void Start()
@@ -38,8 +32,7 @@ public class RangedEnemy : Unit
             target = playerObject.transform;
         }
 
-        attackTimer = attackCooldown;
-        repositionTimer = repositionTime;
+        attackCooldownTimer = attackSpeed;
     }
 
     private void Update()
@@ -47,23 +40,17 @@ public class RangedEnemy : Unit
         if (target == null)
             return;
 
-        attackTimer -= Time.deltaTime;
-        repositionTimer -= Time.deltaTime;
+        attackCooldownTimer -= Time.deltaTime;
 
         float distance =
             Vector2.Distance(transform.position, target.position);
 
         if (distance <= attackRange)
         {
-            if (attackTimer <= 0f)
+            if (attackCooldownTimer <= 0f)
             {
                 Attack();
-                attackTimer = attackCooldown;
-            }
-
-            if (repositionTimer <= 0f)
-            {
-                repositionTimer = repositionTime;
+                attackCooldownTimer = attackSpeed;
             }
         }
         //Same as Enemy

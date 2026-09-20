@@ -10,8 +10,6 @@ public class Enemy : Unit
 
     [Header("Attack")]
     [SerializeField] private float attackDelay = 0.2f;
-    [SerializeField] private float attackCooldownTimer = 0;
-    [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private GameObject attackPrefab;
 
     private float currentHealth;
@@ -67,14 +65,17 @@ public class Enemy : Unit
         {
             StartCoroutine(StartToAttack());
         }
+        if (agent.enabled)
+        {
+            agent.SetDestination(target.position);
+        }
 
-        agent.SetDestination(target.position);
     }
 
     private IEnumerator StartToAttack()
     {
         agent.speed = 0;
-        attackCooldownTimer = attackCooldown;
+        attackCooldownTimer = attackSpeed;
         //todo rework so it does not spawn on top of player
         Vector3 pos = target.position;
 
@@ -84,11 +85,11 @@ public class Enemy : Unit
                 pos,
                 transform.rotation
             );
-
+        attack.GetComponent<Attack>().direction = (target.position - transform.position).normalized;
         audioSource.Play();
         Destroy(attack, attackDelay);
 
-        yield return new WaitForSeconds(attackCooldown);
+        yield return new WaitForSeconds(attackSpeed);
 
         agent.speed = moveSpeed;
     }
@@ -109,6 +110,34 @@ public class Enemy : Unit
         {
             Destroy(gameObject);
         }
+    }
+
+    public override void Stagger(Vector2 direction, float force)
+    {
+        StartCoroutine(StaggerRoutine(direction, force, 0.5f)); //Refactor constants (same as Units)
+    }
+
+    private IEnumerator StaggerRoutine(Vector2 direction, float force, float duration)
+    {
+        agent.enabled = false;
+        attackCooldownTimer += 0.5f;
+        if(attackCooldownTimer > attackSpeed)
+        {
+            attackCooldownTimer = attackSpeed;
+        }
+
+        rb.AddForce(direction * force, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(duration);
+
+        rb.linearVelocity = Vector2.zero;
+
+        //Warps the unit if it goes off the platform
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
+        {
+            agent.Warp(hit.position);
+        }
+        agent.enabled = true;
     }
 
     public void SetPlayerInRange(bool isInRange)
