@@ -65,7 +65,7 @@ public class PlayerInputs : Unit
 
         if (movement == Vector3.zero)
         {
-            FindClosestEnemy();
+            FindClosestVisibleEnemy();
             if (target != null && attackCooldownTimer <= 0f)
             {
                 Attack();
@@ -96,8 +96,9 @@ public class PlayerInputs : Unit
         }
     }
 
-    private void FindClosestEnemy()
+    private void FindClosestVisibleEnemy()
     {
+        target = null;
         GameObject[] enemies =
             GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -106,20 +107,38 @@ public class PlayerInputs : Unit
 
         foreach (GameObject enemy in enemies)
         {
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, enemy.transform.position, LayerMask.GetMask("wall"));
+            if(hit.collider != null)
+            {
+                continue;
+            }
+
             float distance =
                 Vector2.Distance(
                     transform.position,
                     enemy.transform.position
                 );
 
-            if (distance <= closestDistance)
+            if(distance < closestDistance)
             {
-                closestDistance = distance;
                 closestEnemy = enemy.transform;
+                closestDistance = distance;
             }
         }
 
         target = closestEnemy;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(transform.position, attRange);
+        if(target != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, target.position);
+        }
+
     }
 
     private void Attack()
