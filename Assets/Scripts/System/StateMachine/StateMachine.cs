@@ -19,12 +19,17 @@ public class StateMachine
         current.State?.fixedUpdate();
     }
 
+    public string getCurrentStateName()
+    {
+        return current.State.GetType().Name;
+    }
+
     public void SetState(IState state) {
         current = nodes[state.GetType()];
         current.State?.onEnter();
     }
 
-    void ChangeState(IState state) {
+    public void ChangeState(IState state) {
         if (state == current.State) return;
         
         var previousState = current.State;
@@ -64,6 +69,16 @@ public class StateMachine
         }
         
         return node;
+    }
+
+    public void addNode(IState state)
+    {
+        var node = nodes.GetValueOrDefault(state.GetType());
+        
+        if (node == null) {
+            node = new StateNode(state);
+            nodes.Add(state.GetType(), node);
+        }
     }
 
 
