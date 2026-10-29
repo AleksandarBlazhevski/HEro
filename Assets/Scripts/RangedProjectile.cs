@@ -7,6 +7,7 @@ public class RangedProjectile : MonoBehaviour
     [SerializeField] private float timeToLive = 1f;
     [SerializeField] private float damage = 20f;
     [SerializeField] private bool isBlokedByWalls = false;
+    [SerializeField] private bool shouldPersist = true;
     [SerializeField] private string target = "Player";
     [SerializeField] GameObject impactPariclePrefab;
     [SerializeField] AudioSource audioSource;
@@ -80,13 +81,23 @@ public class RangedProjectile : MonoBehaviour
                 audioSource.Play();
             }
             
-            ContactPoint2D contact = collision.contacts[0];
-            Vector2 spawnPos = contact.point;
+            if(impactPariclePrefab != null)
+            {
+                ContactPoint2D contact = collision.contacts[0];
+                Vector2 spawnPos = contact.point;
 
-            Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, contact.normal);
-            GameObject particles = Instantiate(impactPariclePrefab, spawnPos, spawnRotation);
-            Destroy(particles, 2f);
+                Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, contact.normal);
+
+                GameObject particles = Instantiate(impactPariclePrefab, spawnPos, spawnRotation);
+                Destroy(particles, 2f);
+            }
+
             GetComponent<Collider2D>().enabled = false;
+
+            if (!shouldPersist)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -1,7 +1,8 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
-//Maybe change to scripatable object
+//Maybe change to scripatable object?
 public class BossAction
 {
     [Header("Conditions")]
@@ -9,13 +10,26 @@ public class BossAction
     [SerializeField] float maxDistance = float.MaxValue;
     [SerializeField] public float cooldown = 2f;
     [SerializeField] public float cooldownTimer = 0;
-    [SerializeField] public float recoverTime = 2f;
-    [SerializeField] public float duration = 2f;
+    [SerializeField] public float recoverDuration = 2f;
+    [SerializeField] public float windUpDuration = 2f;
+    [SerializeField] public float actionDuration = 2f;
 
 
     [Header("Preferences")]
     [SerializeField] protected float weigth = 10f;
     [SerializeField] float preferredRange = 2f;
+
+    private Animator animator;
+    public string windup {get; private set;}
+    public string action {get; private set;}
+
+
+    public BossAction(Animator animator, string windup, string action)
+    {
+        this.animator = animator;
+        this.windup = windup;
+        this.action = action;
+    }
 
     public float calculateScore(float distance)
     {
@@ -27,12 +41,6 @@ public class BossAction
         return weigth * score;
     }
 
-    public virtual void perform()
-    {
-        //TODO
-        cooldownTimer = cooldown;
-    }
-
     public void updateCooldown()
     {
         if(cooldownTimer > 0)
@@ -41,31 +49,14 @@ public class BossAction
             if(cooldownTimer < 0) cooldownTimer = 0;
         }
     }
-}
 
-public class BossActionTest1 : BossAction
-{
-    public BossActionTest1() : base()
+    public void startWindUp()
     {
+        animator.Play("Projectile1_wind_up");
+    }
 
-    }
-    public override void perform()
+    public void startAction()
     {
-        base.perform();
-        Debug.Log("[BOSSACTION] test1");
-    }
-}
-
-public class BossActionTest2 : BossAction
-{
-    public BossActionTest2() : base()
-    {
-        weigth = 20f;
-        cooldown = 8f;
-    }
-    public override void perform()
-    {
-        base.perform();
-        Debug.Log("[BOSSACTION] test2");
+        Debug.Log("Action started");
     }
 }

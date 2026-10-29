@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class BossIdleState : BaseState
 {
@@ -12,16 +13,35 @@ public class BossActionState : BaseState
 {
     BossActionController actionController;
     BossController controller;
+    StateTimer windUpTimer;
+    BossAction currentAction = null;
     public BossActionState(BossController controller, Animator animator, BossActionController actionController) : base(animator)
     {
         this.actionController = actionController;
         this.controller = controller;
+
+        windUpTimer = new StateTimer();
     }
 
     public override void onEnter()
     {
-        BossAction action = actionController.getActionFor(controller.getDistance());
-        controller.performAction(action);
+        currentAction = actionController.getActionFor(controller.getDistance());
+        windUpTimer.Reset();
+        animator.Play(currentAction.windup);
+    }
+
+    public override void update()
+    {
+        if (currentAction != null && windUpTimer.IsFinished(currentAction.windUpDuration))
+        {
+            animator.Play(currentAction.action);
+            // controller.setRecoverTimer(currentAction.recoverDuration);
+        }
+    }
+
+    public override void onExit()
+    {
+        currentAction = null;
     }
 }
 
@@ -62,5 +82,22 @@ public class BossDeadState : BaseState
     public BossDeadState(Animator animator) : base(animator)
     {
         
+    }
+}
+
+
+public class StateTimer
+{
+    private float elapsed;
+
+    public bool IsFinished(float duration)
+    {
+        elapsed += Time.deltaTime;
+        return elapsed >= duration;
+    }
+
+    public void Reset()
+    {
+        elapsed = 0f;
     }
 }

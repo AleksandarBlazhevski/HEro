@@ -22,6 +22,10 @@ public class BossController : MonoBehaviour
     [SerializeField] float staggerValue = 0f;
     [SerializeField] float windUpTimer = 0f;
 
+    [Header("ONLY FOR TESTING")]
+    [SerializeField] AnimationClip windup1;
+    [SerializeField] AnimationClip perform1;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -49,17 +53,11 @@ public class BossController : MonoBehaviour
         return Vector2.Distance(target.position, transform.position);
     }
 
-    public void performAction(BossAction action)
+    public void setRecoverTimer(float value)
     {
-        StartCoroutine(testAction(action));
+        recoverTimer = value;
     }
 
-    IEnumerator testAction(BossAction action)
-    {
-        action.perform();
-        yield return new WaitForSeconds(action.duration);
-        recoverTimer = action.recoverTime;
-    }
     void initStates()
     {
         stateMachine = new StateMachine();
@@ -89,8 +87,7 @@ public class BossController : MonoBehaviour
     {
         actionController = new BossActionController(new List<BossAction>()
         {
-            new BossActionTest1(),
-            new BossActionTest2(),
+            new BossAction(animator, "Projectile1_wind_up", "Projectile1_attack")
         });
 
     }
