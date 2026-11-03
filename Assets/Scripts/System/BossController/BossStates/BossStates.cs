@@ -7,36 +7,49 @@ public class BossIdleState : BaseState
     {
         
     }
+
+    public override void onEnter()
+    {
+        animator.Play("Idle");
+    }
 }
 
 public class BossActionState : BaseState
 {
     BossActionController actionController;
     BossController controller;
-    StateTimer windUpTimer;
+    BasicTimer windUpTimer;
     BossAction currentAction = null;
     public BossActionState(BossController controller, Animator animator, BossActionController actionController) : base(animator)
     {
         this.actionController = actionController;
         this.controller = controller;
 
-        windUpTimer = new StateTimer();
+        windUpTimer = new BasicTimer();
     }
 
     public override void onEnter()
     {
-        currentAction = actionController.getActionFor(controller.getDistance());
         windUpTimer.Reset();
-        animator.Play(currentAction.windup);
+        currentAction = actionController.getActionFor(controller.getDistance());
+        Debug.Log($"Attack selected {currentAction.data.actionName}");
+        animator.Play(currentAction.data.windUpName);
     }
 
     public override void update()
     {
-        if (currentAction != null && windUpTimer.IsFinished(currentAction.windUpDuration))
+        if (currentAction != null && windUpTimer.IsFinished(currentAction.data.windUpDuration))
         {
-            animator.Play(currentAction.action);
-            // controller.setRecoverTimer(currentAction.recoverDuration);
+            controller.setRecoverTimer(currentAction.data.recoverDuration);
+            performAction();
+            
         }
+        windUpTimer.Tick();
+    }
+
+    void performAction()
+    {
+        currentAction.performAction();
     }
 
     public override void onExit()
@@ -86,14 +99,18 @@ public class BossDeadState : BaseState
 }
 
 
-public class StateTimer
+public class BasicTimer
 {
     private float elapsed;
 
     public bool IsFinished(float duration)
     {
-        elapsed += Time.deltaTime;
         return elapsed >= duration;
+    }
+
+    public void Tick()
+    {
+        elapsed += Time.deltaTime;
     }
 
     public void Reset()

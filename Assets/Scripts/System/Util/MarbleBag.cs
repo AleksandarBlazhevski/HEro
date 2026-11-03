@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+//Intuitive random
 public class MarbleBag<T>
 {
     private readonly List<T> fullListing;

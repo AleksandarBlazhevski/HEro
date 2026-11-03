@@ -316,6 +316,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6945362709094008362, guid: 52900ac8f4fb4ae4d9d48561a3b9d651, type: 3}
+      propertyPath: actionDataList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6945362709094008362, guid: 52900ac8f4fb4ae4d9d48561a3b9d651, type: 3}
+      propertyPath: 'actionDataList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 15ab9c589a7c4df4ab9ea72fad824a36, type: 2}
+    - target: {fileID: 6945362709094008362, guid: 52900ac8f4fb4ae4d9d48561a3b9d651, type: 3}
+      propertyPath: 'actionDataList.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 6cee0c3357de19946b122a8e258ccd91, type: 2}
     - target: {fileID: 8200373525304042005, guid: 52900ac8f4fb4ae4d9d48561a3b9d651, type: 3}
       propertyPath: m_Name
       value: Topka

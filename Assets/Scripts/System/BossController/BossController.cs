@@ -13,7 +13,7 @@ public class BossController : MonoBehaviour
 
     [Header("Base")]
     [SerializeField] float currentHealth = 100;
-    [SerializeField] Transform target = null;
+    [SerializeField] public Transform target = null;
     [SerializeField] string state = "";
     [SerializeField] float staggerCoef = 0.1f;
 
@@ -21,16 +21,15 @@ public class BossController : MonoBehaviour
     [SerializeField] public float recoverTimer = 0f;
     [SerializeField] float staggerValue = 0f;
     [SerializeField] float windUpTimer = 0f;
+    [SerializeField] float distanceToTarget = 0f;
 
-    [Header("ONLY FOR TESTING")]
-    [SerializeField] AnimationClip windup1;
-    [SerializeField] AnimationClip perform1;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         healthbarManager = GetComponent<HealthbarManager>();
-        initActions();
+        actionController = GetComponent<BossActionController>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         initStates();
     }
 
@@ -38,6 +37,8 @@ public class BossController : MonoBehaviour
     {
         stateMachine.Update();
         actionController.updateCooldown();
+        
+        if(target != null) distanceToTarget = Vector2.Distance(transform.position, target.position);
 
         state = stateMachine.getCurrentStateName();
         if(staggerValue > 0)
@@ -81,15 +82,6 @@ public class BossController : MonoBehaviour
         At(staggerState, actionState, new FuncPredicate(() => staggerValue <= 0f));
 
         stateMachine.SetState(idleState);
-    }
-
-    void initActions()
-    {
-        actionController = new BossActionController(new List<BossAction>()
-        {
-            new BossAction(animator, "Projectile1_wind_up", "Projectile1_attack")
-        });
-
     }
 
     void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);

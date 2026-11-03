@@ -481,6 +481,7 @@ GameObject:
   - component: {fileID: 4317148632013642220}
   - component: {fileID: 4107362796600894004}
   - component: {fileID: 2467187965151413550}
+  - component: {fileID: 6945362709094008362}
   - component: {fileID: 292951672084348912}
   m_Layer: 0
   m_Name: Topka
@@ -503,8 +504,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6973203857114137619}
-  - {fileID: 2870821760401537204}
   - {fileID: 706584595263117920}
+  - {fileID: 2758107532918621856}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4317148632013642220
@@ -585,8 +586,6 @@ MonoBehaviour:
   recoverTimer: 0
   staggerValue: 0
   windUpTimer: 0
-  windup1: {fileID: 0}
-  perform1: {fileID: 0}
 --- !u!114 &2467187965151413550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,6 +602,21 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   curPercentage: 0
+--- !u!114 &6945362709094008362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200373525304042005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b3213353871f341aacf1c5c93547ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossActionController
+  actionDataList:
+  - {fileID: 11400000, guid: 7f56dafcd98cd974fb85d805dba03a10, type: 2}
+  firePoint: {fileID: 2758107532918621856}
 --- !u!95 &292951672084348912
 Animator:
   serializedVersion: 7
@@ -625,77 +639,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1001 &647580608276052717
-PrefabInstance:
+--- !u!1 &8602358790246288422
+GameObject:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 3433025033152977135}
-    m_Modifications:
-    - target: {fileID: 385530593490589667, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398984133685822041, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398984133685822041, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398984133685822041, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398984133685822041, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398984133685822041, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398984133685822041, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398984133685822041, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398984133685822041, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398984133685822041, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398984133685822041, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4425980151919085232, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8269455972844174884, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_Name
-      value: TopkaAttack1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8269455972844174884, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
---- !u!4 &2870821760401537204 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3398984133685822041, guid: 7fc0efc741416c1479cc1efa6227ef39, type: 3}
-  m_PrefabInstance: {fileID: 647580608276052717}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2758107532918621856}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2758107532918621856
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8602358790246288422}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3433025033152977135}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
