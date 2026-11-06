@@ -25,7 +25,7 @@ public class BossAction
         float rangeError = Mathf.Abs(distance - data.preferredRange);
         float score = 1f / (1f + rangeError);
 
-        Debug.Log($"[{data.attackName}] Error distance: {rangeError}. Score: {score}");
+        // Debug.Log($"[{data.attackName}] Error distance: {rangeError}. Score: {score}");
 
         return data.weigth * score;
     }

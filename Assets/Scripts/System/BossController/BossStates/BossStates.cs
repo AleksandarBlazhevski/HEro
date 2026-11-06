@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class BossIdleState : BaseState
 {
@@ -11,6 +12,31 @@ public class BossIdleState : BaseState
     public override void onEnter()
     {
         animator.Play("Idle");
+    }
+}
+
+public class BossChaseState : BaseState
+{
+    NavMeshAgent agent;
+    BossController controller;
+    float cheseDistance = 5;
+    public BossChaseState(BossController bossController, Animator animator, NavMeshAgent agent, float chaseDistance) : base(animator)
+    {
+        this.agent = agent;
+        this.controller = bossController;
+        this.cheseDistance = chaseDistance;
+    }
+
+    public override void onEnter()
+    {
+        // animator.Play("Chase");
+        agent.enabled = true;
+        agent.destination = controller.target.position;
+    }
+
+    public override void onExit()
+    {
+        agent.enabled = false;
     }
 }
 
@@ -30,9 +56,10 @@ public class BossActionState : BaseState
 
     public override void onEnter()
     {
+        controller.activateRotator();
         windUpTimer.Reset();
         currentAction = actionController.getActionFor(controller.getDistance());
-        Debug.Log($"Attack selected {currentAction.data.actionName}");
+        // Debug.Log($"Attack selected {currentAction.data.actionName}");
         animator.Play(currentAction.data.windUpName);
     }
 
@@ -40,6 +67,7 @@ public class BossActionState : BaseState
     {
         if (currentAction != null && windUpTimer.IsFinished(currentAction.data.windUpDuration))
         {
+            controller.deactivateRotator();
             controller.setRecoverTimer(currentAction.data.recoverDuration);
             performAction();
             
@@ -68,7 +96,7 @@ public class BossRecoverState : BaseState
 
     public override void onEnter()
     {
-        Debug.Log("Boss Recovering...");
+        animator.Play("Recover");
     }
 
     public override void update()
@@ -92,9 +120,16 @@ public class BossStaggerState : BaseState
 
 public class BossDeadState : BaseState
 {
-    public BossDeadState(Animator animator) : base(animator)
+    BossController controller;
+    public BossDeadState(BossController bossController, Animator animator) : base(animator)
     {
-        
+        this.controller = bossController;
+    }
+
+    public override void onEnter()
+    {
+        controller.die();
+        animator.Play("Dying");
     }
 }
 

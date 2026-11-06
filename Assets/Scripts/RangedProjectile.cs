@@ -67,7 +67,17 @@ public class RangedProjectile : MonoBehaviour
                 Vector2 direction = (collision.transform.position - transform.position).normalized;
                 unit.Stagger(direction, damage / 10f); //todo constants
                 unit.TakeDamage(damage);
+            }else
+            {
+                HealthbarManager healthbar = collision.gameObject.GetComponentInChildren<HealthbarManager>();
+                if(healthbar != null)
+                {
+                    Debug.Log($"Health manager detected. {collision.gameObject.name} took: {damage} points of damage");
+                    healthbar.takeDamage(damage);
+                }
             }
+
+
 
             Destroy(gameObject);
         }

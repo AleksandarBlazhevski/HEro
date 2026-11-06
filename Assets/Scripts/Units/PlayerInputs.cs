@@ -60,8 +60,16 @@ public class PlayerInputs : Unit
             movement.x += 1;
 
         movement = movement.normalized;
-
-        attackCooldownTimer -= Time.deltaTime;
+        
+        
+        if(attackCooldownTimer <= 0)
+        {
+            attackCooldownTimer = 0;
+        }
+        else
+        {
+            attackCooldownTimer -= Time.deltaTime;
+        }
 
         if (movement == Vector3.zero)
         {

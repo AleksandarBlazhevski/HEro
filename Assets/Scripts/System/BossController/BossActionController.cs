@@ -58,7 +58,7 @@ public class BossActionController : MonoBehaviour
                 bestScore = score;
             }
         }
-        Debug.Log($"Best score: {bestScore}");
+        // Debug.Log($"Best score: {bestScore}");
         return selectedAction;
     }
 
@@ -70,12 +70,10 @@ public class BossActionController : MonoBehaviour
         float angle =
             Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
-
         Instantiate(
             projectile,
             firePoint.position,
-            transform.rotation
+            Quaternion.Euler(0f, 0f, angle)
         );
 
     }

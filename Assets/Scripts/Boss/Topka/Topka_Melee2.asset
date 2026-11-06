@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b424421065aea4886f98295172ff66, type: 3}
+  m_Name: Topka_Melee2
+  m_EditorClassIdentifier: Assembly-CSharp::BossActionData
+  attackName: Melee2
+  minDistance: 0
+  maxDistance: 3.4028235e+38
+  cooldown: 2
+  windUpDuration: 2
+  actionDuration: 2
+  recoverDuration: 2
+  weigth: 10
+  preferredRange: 2
+  windUpName: Melee2_wind_up
+  actionName: Melee2_attack
+  projectile: {fileID: 1166273647989438408, guid: b760367ca94bd9e4e92e6ff0c376e851, type: 3}

@@ -15,10 +15,10 @@ MonoBehaviour:
   attackName: projectile2
   minDistance: 0
   maxDistance: 3.4028235e+38
-  cooldown: 6
-  windUpDuration: 3
-  actionDuration: 3
-  recoverDuration: 3
+  cooldown: 10
+  windUpDuration: 2
+  actionDuration: 2
+  recoverDuration: 4
   weigth: 12
   preferredRange: 6
   windUpName: Projectile2_wind_up

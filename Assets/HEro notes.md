@@ -1,28 +1,32 @@
-\- Melee attack style rework
+**TODO**
 
-\- Melee attack not spawn on top of player
+- Melee attack style rework
 
-\- Wall material
+- Melee attack not spawn on top of player
+
+- Wall material
+
+- Healthbar damage animation
 
 
+**Refactor** 
 
-Refactor
-
-\- Constants
+- Magic numbers -> Constants
+- Project structure
 
 
 
 
 
 **Boss system**
-* Action animation system
 
-* Test Attack animation 1
-  * Projectile
-* Test Attack animation 2
-  * Projectile 2
+- Chase if loss of LOS
 
-* Damage system
+- Reuse boss system for other units
 
-* Action scriptable object for reusability
+- Melee generic script
 
+
+
+*Legend*
+- LOS -> Loss of sigth

@@ -15,9 +15,9 @@ MonoBehaviour:
   attackName: Projectile1
   minDistance: 0
   maxDistance: 3.4028235e+38
-  cooldown: 2
-  windUpDuration: 2
-  actionDuration: 2
+  cooldown: 4
+  windUpDuration: 1
+  actionDuration: 1
   recoverDuration: 2
   weigth: 10
   preferredRange: 4

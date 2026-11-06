@@ -5,8 +5,8 @@ public class HealthbarManager : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private float currentHealth = 100f;
-    public float curPercentage = 1;
+    [SerializeField] private float currentHealth  = 100f;
+    public float CurrentHealth { get => currentHealth; protected set => currentHealth = value; }
 
     void Awake()
     {
@@ -17,11 +17,10 @@ public class HealthbarManager : MonoBehaviour
 
     void Update()
     {
-        // fixHealtBar();
-
-        //
-        curPercentage = currentHealth / maxHealth;
-        slider.value = currentHealth;
+        // if (Input.GetKeyDown(KeyCode.O))
+        // {
+        //     takeDamage(15);
+        // }
     }
 
     public void takeDamage(float value)

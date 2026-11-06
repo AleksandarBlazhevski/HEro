@@ -15,8 +15,8 @@ MonoBehaviour:
   attackName: Melee1
   minDistance: 0
   maxDistance: 2
-  cooldown: 1
-  windUpDuration: 4
+  cooldown: 6
+  windUpDuration: 2
   actionDuration: 2
   recoverDuration: 2
   weigth: 10
